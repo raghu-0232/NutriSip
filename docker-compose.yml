@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "Raghu123@"
+      MYSQL_DATABASE: "nutrisip"
+      MYSQL_USER: "nutrisip"
+      MYSQL_PASSWORD: "nutrisip"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      MYSQL_HOST: mysql_db
+      MYSQL_USER: nutrisip
+      MYSQL_PASSWORD: nutrisip
+      MYSQL_DATABASE: nutrisip
+      PHONEPE_MERCHANT_ID: ${PHONEPE_MERCHANT_ID}
+      PHONEPE_SALT_KEY: ${PHONEPE_SALT_KEY}
+      PHONEPE_REDIRECT_URL: ${PHONEPE_REDIRECT_URL}
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:5000
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  mysql_data:

@@ -1,0 +1,287 @@
+.App {
+  text-align: center;
+  background-color: #FDFBF7; /* New light beige background */ /* bkp: #F8F5F0 */
+  color: #333333; /* Dark gray text for readability */
+  min-height: 100vh;
+  padding: 50px 20px;
+  font-family: 'Lato', sans-serif; /* Clean sans-serif for body */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Georgia', serif; /* Elegant serif for headings */
+  color: #222222; /* Darker heading color */
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.product {
+  border: 1px solid #E0D9CE; /* Soft border */
+  border-radius: 12px; /* Rounded corners */
+  padding: 35px;
+  margin: 25px;
+  width: 260px; /* Comfortable width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */ /* bkp: #FFFFFF */ /* bkp: #FFFFFF */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.selection-dot {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 16px;
+  height: 16px;
+  background-color: #6B8E23; /* Muted olive green */
+  border-radius: 50%; /* Rounded dot */
+  animation: none; /* No animation for a calmer feel */
+  box-shadow: none;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow on hover */
+}
+
+.product-image {
+  width: 150px; /* Slightly larger images */
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 25px;
+  border-radius: 50%; /* Fully rounded images */
+  border: 3px solid #B8860B; /* Darker gold/bronze border */
+  box-shadow: 0 0 8px rgba(184, 134, 11, 0.4);
+}
+
+.product h3 {
+  font-size: 1.9em; /* Elegant product names */
+  margin-bottom: 10px;
+  color: #4A4A4A; /* Dark gray for product names */
+}
+
+.product p {
+  font-size: 1.2em;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+.product input {
+  display: none;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden;
+  background-color: #F0F0F0;
+}
+
+.quantity-selector button {
+  background-color: #6B8E23; /* Muted olive green */
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1.3em;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.quantity-selector button:hover {
+  background-color: #556B2F; /* Darker olive green for hover */
+}
+
+.quantity-selector span {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: #333333;
+  background-color: #FFFFFF;
+  min-width: 60px;
+  text-align: center;
+}
+
+.cart {
+  border: 1px solid #E0D9CE;
+  border-radius: 12px; /* Rounded corners */
+  padding: 40px;
+  margin: 50px auto;
+  width: 420px; /* Comfortable width */
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart h2 {
+  margin-top: 0;
+  color: #B8860B; /* Darker gold/bronze */
+  font-size: 2.6em; /* Elegant cart heading */
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #B8860B;
+  padding-bottom: 15px;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.cart li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 1.3em;
+  color: #555555;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #DDDDDD;
+}
+
+.cart li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.cart h3 {
+  font-size: 2.3em;
+  color: #B8860B;
+  margin-top: 40px;
+  border-top: 2px solid #B8860B;
+  padding-top: 25px;
+  width: 100%;
+  text-align: right;
+}
+
+.cart input[type="text"] {
+  width: calc(100% - 24px); /* Adjust for padding */
+  padding: 14px;
+  margin-top: 25px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px; /* Rounded corners */
+  background-color: #F8F8F8;
+  color: #333333;
+  font-size: 1.1em;
+  box-sizing: border-box;
+}
+
+.cart input[type="text"]::placeholder {
+  color: #AAAAAA;
+}
+
+.cart button {
+  background-color: #B8860B; /* Darker gold/bronze button */
+  color: #FFFFFF;
+  padding: 18px 35px;
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 1.5em;
+  margin-top: 40px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.cart button:hover {
+  background-color: #A0780A; /* Slightly darker gold for hover */
+  transform: translateY(-3px);
+}
+
+.cart button:disabled {
+  background-color: #CCCCCC;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  color: #D9534F; /* Muted red for error messages */
+  margin-top: 15px;
+  font-size: 1.1em;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 1200px) {
+  .product {
+    width: 240px;
+    margin: 20px;
+    padding: 30px;
+  }
+  .product-image {
+    width: 130px;
+    height: 130px;
+  }
+  .cart {
+    width: 380px;
+    padding: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 30px 15px;
+  }
+  .product {
+    width: 90%;
+    max-width: 300px;
+    margin: 15px auto;
+    padding: 25px;
+  }
+  .product-image {
+    width: 110px;
+    height: 110px;
+  }
+  .product h3 {
+    font-size: 1.7em;
+  }
+  .product p {
+    font-size: 1.1em;
+  }
+  .quantity-selector button {
+    padding: 8px 14px;
+    font-size: 1.2em;
+  }
+  .quantity-selector span {
+    padding: 8px 18px;
+    font-size: 1.1em;
+    min-width: 50px;
+  }
+  .cart {
+    width: 95%;
+    padding: 30px;
+  }
+  .cart h2 {
+    font-size: 2.2em;
+  }
+  .cart li {
+    font-size: 1.2em;
+  }
+  .cart h3 {
+    font-size: 1.9em;
+  }
+  .cart input[type="text"] {
+    padding: 12px;
+    font-size: 1em;
+  }
+  .cart button {
+    padding: 15px 30px;
+    font-size: 1.3em;
+  }
+}
