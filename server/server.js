@@ -122,7 +122,7 @@ app.get('/api/orders/:orderId', async (req, res) => {
   }
 });
 
-const server = app.listen(port, () => {
+const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
 

@@ -50,7 +50,8 @@ services:
     depends_on:
       - backend
     environment:
-      REACT_APP_BACKEND_URL: http://localhost:5000
+      REACT_APP_BACKEND_URL: http://backend:5001
+      REACT_APP_WEBSOCKET_URL: ws://backend:5001
     volumes:
       - .:/app
       - /app/node_modules
