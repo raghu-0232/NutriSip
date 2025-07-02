@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
+const WebSocket = require('ws');
 const app = express();
 const port = 5001;
 const cors = require('cors');
