@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
-const mysql = require('mysql2/promise');
 const app = express();
 const port = 5000;
 
@@ -12,52 +11,21 @@ const PHONEPE_SALT_KEY = process.env.PHONEPE_SALT_KEY;
 const PHONEPE_API_KEY = process.env.PHONEPE_API_KEY;
 const PHONEPE_HOST_URL = 'https://api-preprod.phonepe.com/apis/pg-sandbox';
 
-const pool = mysql.createPool({
-  host: process.env.MYSQL_HOST || 'localhost',
-  user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'Raghu123@',
-  database: process.env.MYSQL_DATABASE || 'nutrisip',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
-
-async function createOrdersTable() {
-  try {
-    const connection = await pool.getConnection();
-    await connection.execute(`
-      CREATE TABLE IF NOT EXISTS orders (
-        id VARCHAR(255) PRIMARY KEY,
-        amount DECIMAL(10, 2) NOT NULL,
-        status VARCHAR(50) NOT NULL,
-        phone_number VARCHAR(20),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-    connection.release();
-    console.log('Orders table checked/created successfully.');
-  } catch (err) {
-    console.error('Error creating orders table:', err);
-  }
-}
-
-createOrdersTable();
+// In-memory store for orders
+const orders = {};
 
 app.post('/api/orders', async (req, res) => {
   const { amount, phoneNumber } = req.body;
   const orderId = `ORD${Date.now()}`;
-  try {
-    const connection = await pool.getConnection();
-    await connection.execute(
-      'INSERT INTO orders (id, amount, status, phone_number) VALUES (?, ?, ?, ?)',
-      [orderId, amount, 'pending', phoneNumber]
-    );
-    connection.release();
-    res.json({ orderId });
-  } catch (error) {
-    console.error('Error creating order:', error);
-    res.status(500).send('Error creating order');
-  }
+  orders[orderId] = {
+    id: orderId,
+    amount,
+    status: 'pending',
+    phoneNumber,
+    created_at: new Date().toISOString()
+  };
+  console.log('Order created:', orders[orderId]);
+  res.json({ orderId });
 });
 
 app.post('/pay', async (req, res) => {
@@ -123,18 +91,13 @@ app.post('/payment-callback', async (req, res) => {
       orderStatus = 'failed';
     }
 
-    try {
-      const connection = await pool.getConnection();
-      await connection.execute(
-        'UPDATE orders SET status = ? WHERE id = ?',
-        [orderStatus, transactionId]
-      );
-      connection.release();
-      res.send('Callback received and verified');
-    } catch (error) {
-      console.error('Error updating order status:', error);
-      res.status(500).send('Error updating order status');
+    if (orders[transactionId]) {
+      orders[transactionId].status = orderStatus;
+      console.log('Order status updated:', orders[transactionId]);
+    } else {
+      console.error('Order not found for callback:', transactionId);
     }
+    res.send('Callback received and verified');
   } else {
     console.error('Callback verification failed:', req.body);
     res.status(400).send('Callback verification failed');
@@ -143,21 +106,11 @@ app.post('/payment-callback', async (req, res) => {
 
 app.get('/api/orders/:orderId', async (req, res) => {
   const { orderId } = req.params;
-  try {
-    const connection = await pool.getConnection();
-    const [rows] = await connection.execute(
-      'SELECT id, amount, status FROM orders WHERE id = ?',
-      [orderId]
-    );
-    connection.release();
-    if (rows.length > 0) {
-      res.json(rows[0]);
-    } else {
-      res.status(404).send('Order not found');
-    }
-  } catch (error) {
-    console.error('Error fetching order details:', error);
-    res.status(500).send('An error occurred while fetching order details.');
+  const order = orders[orderId];
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404).send('Order not found');
   }
 });
 
