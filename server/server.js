@@ -121,6 +121,25 @@ app.get('/api/orders/:orderId', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
+});
+
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', ws => {
+  console.log('Client connected');
+
+  ws.on('message', message => {
+    console.log(`Received message: ${message}`);
+    ws.send(`Echo: ${message}`); // Echo back the message
+  });
+
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
+
+  ws.on('error', error => {
+    console.error('WebSocket error:', error);
+  });
 });
