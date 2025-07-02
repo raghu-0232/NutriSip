@@ -72,7 +72,7 @@ function App() {
 
     try {
       // Create order in your backend
-      const orderResponse = await fetch('http://localhost:5000/api/orders', {
+      const orderResponse = await fetch('http://localhost:5001/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ function App() {
       const orderData = await orderResponse.json();
       const { orderId } = orderData;
 
-      const response = await fetch('http://localhost:5000/pay', {
+      const response = await fetch('http://localhost:5001/pay', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

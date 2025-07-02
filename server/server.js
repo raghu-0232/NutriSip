@@ -1,15 +1,20 @@
+require('dotenv').config();
+
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
 const app = express();
-const port = 5000;
+const port = 5001;
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 
 const PHONEPE_MERCHANT_ID = process.env.PHONEPE_MERCHANT_ID;
 const PHONEPE_SALT_KEY = process.env.PHONEPE_SALT_KEY;
 const PHONEPE_API_KEY = process.env.PHONEPE_API_KEY;
 const PHONEPE_HOST_URL = 'https://api-preprod.phonepe.com/apis/pg-sandbox';
+const PHONEPE_PAY_URL = process.env.PHONEPE_PAY_URL;
 
 // In-memory store for orders
 const orders = {};
@@ -38,7 +43,7 @@ app.post('/pay', async (req, res) => {
     amount: amount * 100, // Amount in paise
     redirectUrl: process.env.PHONEPE_REDIRECT_URL || `http://localhost:3000/payment-status`,
     redirectMode: 'REDIRECT',
-    callbackUrl: 'http://localhost:5000/payment-callback',
+    callbackUrl: 'http://localhost:5001/payment-callback',
     mobileNumber: number,
     paymentInstrument: {
       type: 'PAY_PAGE',
@@ -54,7 +59,7 @@ app.post('/pay', async (req, res) => {
 
   const options = {
     method: 'post',
-    url: `${PHONEPE_HOST_URL}/v1/pay`,
+    url: process.env.PHONEPE_PAY_URL,
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
@@ -66,11 +71,13 @@ app.post('/pay', async (req, res) => {
   };
 
   try {
+    console.log('PhonePe Request Options:', JSON.stringify(options, null, 2));
+    console.log('PhonePe Request Payload (decoded):', Buffer.from(payloadMain, 'base64').toString('utf8'));
     const response = await axios(options);
     res.json(response.data);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 

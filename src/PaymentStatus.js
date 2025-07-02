@@ -1,37 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const PaymentStatus = () => {
   const location = useLocation();
   const [status, setStatus] = useState('processing');
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const transactionId = queryParams.get('transactionId'); // Assuming PhonePe returns transactionId
-    
-
-    if (transactionId) {
-      const fetchOrderStatus = async () => {
-        try {
-          const response = await fetch(`http://localhost:5000/api/orders/${transactionId}`);
-          const data = await response.json();
-          if (response.ok) {
-            setStatus(data.status);
-          } else {
-            setStatus('unknown');
-            console.error('Error fetching order status:', data.message);
-          }
-        } catch (error) {
-          setStatus('unknown');
-          console.error('Error fetching order status:', error);
-        }
-      };
-      fetchOrderStatus();
-    } else {
-      setStatus('invalid');
+    if (status === 'failed') {
+      setTimeout(() => {
+        navigate('/'); // Redirect to the main page where the cart is displayed
+      }, 3000); // Redirect after 3 seconds
     }
-  }, [location]);
+
+    const queryParams = new URLSearchParams(location.search);
+    const transactionId = queryParams.get('transactionId');
+
+    if (!transactionId) {
+      setStatus('invalid');
+      return;
+    }
+
+    const pollingInterval = 5000; // Poll every 5 seconds
+    const maxPollingDuration = 5 * 60 * 1000; // 5 minutes in milliseconds
+    let pollingTimer = 0;
+
+    const fetchOrderStatus = async () => {
+      try {
+        const response = await fetch(`http://localhost:5001/api/orders/${transactionId}`);
+        const data = await response.json();
+        if (response.ok) {
+          setStatus(data.status);
+        } else {
+          setStatus('unknown');
+          console.error('Error fetching order status:', data.message);
+        }
+      } catch (error) {
+        setStatus('unknown');
+        console.error('Error fetching order status:', error);
+      }
+    };
+
+    // Initial fetch
+    fetchOrderStatus();
+
+    const intervalId = setInterval(() => {
+      if (status === 'processing' && pollingTimer < maxPollingDuration) {
+        fetchOrderStatus();
+        pollingTimer += pollingInterval;
+      } else {
+        clearInterval(intervalId);
+        if (status === 'processing') {
+          setStatus('unknown'); // Set to unknown if still processing after max duration
+        }
+      }
+    }, pollingInterval);
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+
+  }, [location, navigate, status]);
 
   return (
     <div>
