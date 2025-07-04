@@ -203,67 +203,25 @@ h1, h2, h3, h4, h5, h6 {
     padding: 40px 10px;
   }
   .product-list {
-    grid-template-columns: 1fr; /* Single column for products */
-    gap: 25px;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for products */
+    gap: 15px; /* Reduced gap */
   }
   .product {
-    max-width: 320px;
-    margin: 0 auto; /* Center products */
-    padding: 20px;
+    max-width: none; /* Remove max-width to allow grid to control width */
+    margin: 0; /* Remove auto margin */
+    padding: 15px; /* Reduced padding */
   }
   .product-image {
-    width: 120px;
-    height: 120px;
-  }
-  .product h3 {
-    font-size: 1.8em;
-  }
-  .product p {
-    font-size: 1.1em;
-  }
-  .quantity-selector button {
-    padding: 10px 15px;
-    font-size: 1.2em;
-  }
-  .quantity-selector span {
-    padding: 10px 20px;
-    font-size: 1.1em;
-    min-width: 60px;
-  }
-  .cart {
-    width: 90%; /* Cart takes more width */
-    padding: 30px;
-  }
-  .cart h2 {
-    font-size: 2.5em;
-  }
-  .cart li {
-    font-size: 1.2em;
-  }
-  .cart h3 {
-    font-size: 2em;
-  }
-}
-
-@media (max-width: 480px) { /* New breakpoint for smaller phones */
-  .App {
-    padding: 20px 5px;
-  }
-  .product-list {
-    gap: 20px;
-  }
-  .product {
-    padding: 15px;
-  }
-  .product-image {
-    width: 100px;
+    width: 100px; /* Smaller images */
     height: 100px;
+    margin-bottom: 15px;
   }
   .product h3 {
-    font-size: 1.6em;
+    font-size: 1.5em; /* Smaller font size */
   }
   .product p {
-    font-size: 1em;
+    font-size: 0.9em; /* Smaller font size */
+    margin-bottom: 15px;
   }
   .quantity-selector button {
     padding: 8px 12px;
@@ -275,15 +233,59 @@ h1, h2, h3, h4, h5, h6 {
     min-width: 50px;
   }
   .cart {
-    padding: 20px;
+    width: 95%; /* Cart takes more width */
+    padding: 25px;
   }
   .cart h2 {
     font-size: 2em;
   }
   .cart li {
-    font-size: 1em;
+    font-size: 1.1em;
   }
   .cart h3 {
     font-size: 1.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 20px 5px;
+  }
+  .product-list {
+    gap: 10px; /* Even smaller gap */
+  }
+  .product {
+    padding: 10px;
+  }
+  .product-image {
+    width: 80px;
+    height: 80px;
+  }
+  .product h3 {
+    font-size: 1.3em;
+  }
+  .product p {
+    font-size: 0.8em;
+  }
+  .quantity-selector button {
+    padding: 6px 10px;
+    font-size: 0.9em;
+  }
+  .quantity-selector span {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    min-width: 40px;
+  }
+  .cart {
+    padding: 15px;
+  }
+  .cart h2 {
+    font-size: 1.8em;
+  }
+  .cart li {
+    font-size: 0.9em;
+  }
+  .cart h3 {
+    font-size: 1.6em;
   }
 }
