@@ -203,12 +203,12 @@ h1, h2, h3, h4, h5, h6 {
     padding: 40px 10px;
   }
   .product-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column for products */
     gap: 25px;
   }
   .product {
     max-width: 320px;
-    margin: 0 auto;
+    margin: 0 auto; /* Center products */
     padding: 20px;
   }
   .product-image {
@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6 {
     min-width: 60px;
   }
   .cart {
-    width: 90%;
+    width: 90%; /* Cart takes more width */
     padding: 30px;
   }
   .cart h2 {
@@ -242,5 +242,48 @@ h1, h2, h3, h4, h5, h6 {
   }
   .cart h3 {
     font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) { /* New breakpoint for smaller phones */
+  .App {
+    padding: 20px 5px;
+  }
+  .product-list {
+    gap: 20px;
+  }
+  .product {
+    padding: 15px;
+  }
+  .product-image {
+    width: 100px;
+    height: 100px;
+  }
+  .product h3 {
+    font-size: 1.6em;
+  }
+  .product p {
+    font-size: 1em;
+  }
+  .quantity-selector button {
+    padding: 8px 12px;
+    font-size: 1em;
+  }
+  .quantity-selector span {
+    padding: 8px 15px;
+    font-size: 1em;
+    min-width: 50px;
+  }
+  .cart {
+    padding: 20px;
+  }
+  .cart h2 {
+    font-size: 2em;
+  }
+  .cart li {
+    font-size: 1em;
+  }
+  .cart h3 {
+    font-size: 1.8em;
   }
 }

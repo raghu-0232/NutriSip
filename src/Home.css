@@ -181,3 +181,24 @@ h1 {
     font-size: 1em;
   }
 }
+
+@media (max-width: 400px) { /* New breakpoint for very small phones */
+  .home-content {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  .subtitle {
+    font-size: 1em;
+  }
+  .benefits h2 {
+    font-size: 1.6em;
+  }
+  .benefits p {
+    font-size: 0.9em;
+  }
+  .click-info {
+    font-size: 0.9em;
+  }
+}
