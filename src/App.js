@@ -63,42 +63,6 @@ function App() {
     return acc + (price / 100) * item.grams;
   }, 0);
 
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const handlePayment = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      // Create order in your backend
-      const orderResponse = await fetch('http://localhost:5001/api/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: total }),
-      });
-      const orderData = await orderResponse.json();
-      const { orderId } = orderData;
-
-      const response = await fetch('http://localhost:5001/pay', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: total, orderId: orderId }),
-      });
-      const data = await response.json();
-      window.location.href = data.data.instrumentResponse.redirectInfo.url;
-    } catch (error) {
-      console.error('Error processing payment:', error);
-      setError('Payment failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="App">
       <div className="product-list">
@@ -116,11 +80,6 @@ function App() {
           ))}
         </ul>
         <h3>Total: ₹{total.toFixed(2)}</h3>
-        
-        <button onClick={handlePayment} disabled={loading}>
-          {loading ? 'Processing...' : 'Pay with PhonePe'}
-        </button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
     </div>
   );

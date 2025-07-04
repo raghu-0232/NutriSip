@@ -49,18 +49,7 @@ This application can be easily deployed using Docker Compose, which orchestrates
 *   Docker installed on your system.
 *   Docker Compose installed on your system.
 
-### 1. Environment Variables
-
-Create a `.env` file in the root directory of the project (where `docker-compose.yml` is located). This file will contain sensitive information and API keys.
-
-```
-# PhonePe API Credentials (replace with your actual values)
-PHONEPE_MERCHANT_ID=YOUR_PHONEPE_MERCHANT_ID
-PHONEPE_SALT_KEY=YOUR_PHONEPE_SALT_KEY
-PHONEPE_REDIRECT_URL=http://localhost:3000/payment-status
-```
-
-### 2. Build and Run with Docker Compose
+### 1. Build and Run with Docker Compose
 
 Navigate to the root directory of the project in your terminal:
 
@@ -82,13 +71,13 @@ docker-compose up -d
 
 The `-d` flag runs the containers in detached mode (in the background).
 
-### 3. Access the Application
+### 2. Access the Application
 
 Once all services are up and running, you can access the frontend application in your web browser at:
 
 `http://localhost:3000`
 
-### 4. Stop the Application
+### 3. Stop the Application
 
 To stop and remove the containers, networks, and volumes created by `docker-compose up`, run:
 
@@ -131,4 +120,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 38a210b (feat: Add Docker Compose deployment instructions and clean up .gitignore)

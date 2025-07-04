@@ -30,9 +30,6 @@ services:
       MYSQL_USER: nutrisip
       MYSQL_PASSWORD: nutrisip
       MYSQL_DATABASE: nutrisip
-      PHONEPE_MERCHANT_ID: ${PHONEPE_MERCHANT_ID}
-      PHONEPE_SALT_KEY: ${PHONEPE_SALT_KEY}
-      PHONEPE_REDIRECT_URL: ${PHONEPE_REDIRECT_URL}
     depends_on:
       mysql_db:
         condition: service_healthy
