@@ -3,15 +3,14 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #0A0A0A; /* Deep dark background */
+  background-color: #f8f4f0; /* Soft cream background */
   cursor: pointer;
-  font-family: 'Roboto Mono', monospace; /* Techy, modern monospace font */
-  color: #E0E0E0; /* Light gray text */
+  font-family: 'Lora', serif;
+  color: #4a4a4a; /* Muted dark gray for general text */
   overflow: hidden;
-  position: relative; /* For background effects */
+  position: relative;
 }
 
-/* Optional: Add subtle background animation for AI feel */
 .home-container::before {
   content: '';
   position: absolute;
@@ -19,63 +18,63 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(205, 133, 63, 0.08) 0%, transparent 70%); /* Warm accent glow */
   animation: pulse-bg 15s infinite alternate;
 }
 
 @keyframes pulse-bg {
   from { transform: scale(1); opacity: 1; }
-  to { transform: scale(1.2); opacity: 0.8; }
+  to { transform: scale(1.05); opacity: 0.9; }
 }
 
 .home-content {
   text-align: center;
-  background: rgba(26, 26, 26, 0.9); /* Slightly transparent dark card */
+  background: #ffffff; /* Clean white card background */
   padding: 60px;
   border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4); /* Cyan glow */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Soft, elegant shadow */
   max-width: 900px;
   animation: fadeInScale 1.5s ease-out;
-  border: 1px solid #333333;
-  position: relative; /* Ensure content is above pseudo-element */
-  z-index: 1; /* Ensure content is above pseudo-element */
+  border: 1px solid #d4c7b8;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.9); }
+  from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
 h1 {
-  font-family: 'Orbitron', sans-serif; /* Futuristic sans-serif for headings */
+  font-family: 'Cormorant Garamond', serif;
   font-size: 4em;
   margin-bottom: 0.5em;
-  color: #00FFFF; /* Cyan/Aqua accent */
-  text-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Stronger glow */
+  color: #8b4513; /* Warm, rich brown */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
   animation: slideInFromTop 1s ease-out;
 }
 
 .subtitle {
   font-size: 1.8em;
   margin-bottom: 2em;
-  color: #B0B0B0;
+  color: #6b6b6b;
   animation: slideInFromBottom 1s ease-out 0.5s;
 }
 
 .benefits {
   margin-top: 3em;
   padding: 20px;
-  border-top: 1px dashed #555555;
-  border-bottom: 1px dashed #555555;
+  border-top: 1px dashed #d4c7b8;
+  border-bottom: 1px dashed #d4c7b8;
   margin-bottom: 3em;
 }
 
 .benefits h2 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 2.5em;
-  color: #FF00FF; /* Vibrant magenta */
+  color: #cd853f; /* Warm accent color */
   margin-bottom: 1.5em;
-  text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
   animation: fadeIn 2s ease-in-out 1s;
 }
 
@@ -83,7 +82,7 @@ h1 {
   font-size: 1.3em;
   line-height: 1.8;
   margin-bottom: 1.5em;
-  color: #C0C0C0;
+  color: #6b6b6b;
   animation: fadeIn 2s ease-in-out 1.5s;
 }
 
@@ -91,9 +90,9 @@ h1 {
   margin-top: 4em;
   font-size: 1.5em;
   font-weight: bold;
-  color: #00FFFF; /* Cyan accent */
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-  animation: pulse-cyan 1.5s infinite;
+  color: #8b4513; /* Warm brown accent */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: pulse-brown 1.5s infinite;
 }
 
 @keyframes fadeIn {
@@ -102,18 +101,18 @@ h1 {
 }
 
 @keyframes slideInFromTop {
-  from { transform: translateY(-100px); opacity: 0; }
+  from { transform: translateY(-80px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes slideInFromBottom {
-  from { transform: translateY(100px); opacity: 0; }
+  from { transform: translateY(80px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes pulse-cyan {
+@keyframes pulse-brown {
   0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 0.9; }
   100% { transform: scale(1); opacity: 1; }
 }
 
