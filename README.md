@@ -6,15 +6,15 @@ This project is a full-stack web application called NutriSip. The entire applica
 
 ### Technology Stack
 
-| Layer      | Technology        | Description                                                                                                                            |
-| :--------- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| **Frontend** | **React.js**      | A JavaScript library for building user interfaces.                                                                                     |
-|            | **Nginx**           | A high-performance web server used to serve the production build of the React application.                                             |
-| **Backend**  | **Node.js**       | A JavaScript runtime environment for executing the backend code.                                                                       |
-|            | **Express.js**    | A web application framework for Node.js, used to build the backend API.                                                                |
-| **Database** | **MySQL**           | A popular open-source relational database used for data storage.                                                                       |
-| **Real-time**| **ws (WebSocket)**| A library enabling two-way, real-time communication between the client and server.                                                     |
-| **Deployment**| **Docker**        | Your entire application (frontend, backend, and database) is containerized using Docker, allowing for consistent and isolated environments. |
+| Layer      | Technology        | Version           | Description                                                                                                                            |
+| :--------- | :---------------- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend** | **React.js**      | `^19.1.0`         | A JavaScript library for building user interfaces.                                                                                     |
+|            | **Nginx**           | `stable-alpine`   | A high-performance web server used to serve the production build of the React application.                                             |
+| **Backend**  | **Node.js**       | `18-alpine`       | A JavaScript runtime environment for executing the backend code.                                                                       |
+|            | **Express.js**    | `^5.1.0`          | A web application framework for Node.js, used to build the backend API.                                                                |
+| **Database** | **MySQL**           | `8.0`             | A popular open-source relational database used for data storage.                                                                       |
+| **Real-time**| **ws (WebSocket)**| `^8.18.3`         | A library enabling two-way, real-time communication between the client and server.                                                     |
+| **Deployment**| **Docker**        | `3.8` (Compose)   | Your entire application (frontend, backend, and database) is containerized using Docker, allowing for consistent and isolated environments. |
 
 # Getting Started with Create React App
 
