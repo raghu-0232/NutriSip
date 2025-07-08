@@ -1,4 +1,21 @@
 # NutriSip
+
+## Project Overview
+
+This project is a full-stack web application called NutriSip. The entire application is containerized using Docker for consistent and isolated development and production environments.
+
+### Technology Stack
+
+| Layer      | Technology        | Description                                                                                                                            |
+| :--------- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend** | **React.js**      | A JavaScript library for building user interfaces.                                                                                     |
+|            | **Nginx**           | A high-performance web server used to serve the production build of the React application.                                             |
+| **Backend**  | **Node.js**       | A JavaScript runtime environment for executing the backend code.                                                                       |
+|            | **Express.js**    | A web application framework for Node.js, used to build the backend API.                                                                |
+| **Database** | **MySQL**           | A popular open-source relational database used for data storage.                                                                       |
+| **Real-time**| **ws (WebSocket)**| A library enabling two-way, real-time communication between the client and server.                                                     |
+| **Deployment**| **Docker**        | Your entire application (frontend, backend, and database) is containerized using Docker, allowing for consistent and isolated environments. |
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
